@@ -1,0 +1,40 @@
+* {
+    -fx-focus-color: transparent;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #1d66e2;
+}
+
+.check-box .box {
+    -fx-focus-color: #1d66e2;
+}
+
+.button {
+    -fx-border-color: #c1c1c1;
+    -fx-border-radius: 3;
+    -fx-background-color: #d2d5db;
+    -fx-background-radius: 3;
+    -fx-min-width: 90;
+}
+
+.button:hover {
+    -fx-background-color: #e8ebef;
+}
+
+.add-button {
+    -fx-background-color: #efefef;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.add-button:hover {
+    -fx-background-color:rgba(224, 224, 224, 1);
+}
+
+.add-button:pressed {
+    -fx-background-color: rgba(224, 224, 224, 0.8);
+}

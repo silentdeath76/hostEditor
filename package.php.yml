@@ -1,0 +1,24 @@
+name: HostFileEdit
+version: 1.0.0
+deps:
+  jphp-core: '*'
+  jphp-zend-ext: '*'
+  jphp-gui-ext: '*'
+plugins:
+  - App
+sources:
+  - src
+includes:
+  - index.php
+devDeps:
+  tester: '*'
+requires:
+  os:
+    - Windows
+app:
+  build:
+    file-name: 'App'
+    #bytecode: 'jvm'
+    #type: 'one-jar' # accept one-jar or multi-jar
+  launcher:
+    types: [ 'bat' ]

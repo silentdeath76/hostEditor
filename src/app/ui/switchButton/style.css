@@ -1,0 +1,28 @@
+* {
+    -switch-button-first-color: white;
+    -switch-button-second-color: #007ed2;
+}
+
+.switch-button {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.switch-button .bg-rect {
+    -fx-fill: -switch-button-first-color;
+    -fx-stroke: -switch-button-second-color;
+}
+
+.switch-button:selected .bg-rect {
+    -fx-fill: -switch-button-second-color;
+}
+
+.switch-button .switcher {
+    -fx-fill: -switch-button-second-color;
+}
+
+.switch-button:selected .switcher {
+    -fx-fill: -switch-button-first-color;
+}
