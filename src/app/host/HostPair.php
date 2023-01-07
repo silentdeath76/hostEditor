@@ -8,7 +8,7 @@ use php\util\Regex;
 
 class HostPair extends AbstractLine
 {
-    const IP_REGEX = '(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*([\w\.]+)($|\s*[#\w+]+.*?$)';
+    const IP_REGEX = '(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*([\w\.-]+)($|\s*[#\w+]+.*?$)';
 
 
     /**

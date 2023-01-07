@@ -7,7 +7,7 @@ namespace app\ui;
 use app\host\{AbstractLine, CommentLine, HostPair};
 use php\lang\IllegalArgumentException;
 use php\gui\{UXApplication, UXForm, UXLabel};
-use php\io\{FileStream, IOException, Stream};
+use php\io\{File, FileStream, IOException, Stream};
 use php\time\Timer;
 use php\util\Scanner;
 
@@ -65,6 +65,8 @@ class Host
             }
         } catch (IllegalArgumentException $e) {
             $this->errorMessage($e->getMessage());
+        } finally {
+            $stream->close();
         }
     }
 
@@ -107,8 +109,17 @@ class Host
                 case 'Отказано в доступе':
                     $this->errorMessage("Can't write to file, please run app from administrator.");
                     break;
+
+                case 'File \'' . $this->stream->getPath() . '\' not found':
+                    if (File::of($this->stream->getPath())->exists()) {
+                        $this->errorMessage("Can't write to file, please run app from administrator.");
+                    } else {
+                        $this->errorMessage('File \'' . $this->stream->getPath() . '\' not found');
+                    }
+                    break;
+
                 default:
-                    $this->errorMessage($e->getMessage());
+                    $this->errorMessage("Unknown error: " . $e->getMessage());
             }
         }
     }
@@ -122,7 +133,7 @@ class Host
         }
 
         $this->form->add($label = new UXLabel($message));
-        $label->style = '-fx-border-width: 0 0 2 0; -fx-border-color: red; -fx-background-color: white; -fx-text-fill: red; -fx-padding: 10;';
+        $label->style = '-fx-border-width: 0 0 2 0; -fx-border-color: #c22929; -fx-background-color: #cb2e2e; -fx-text-fill: white; -fx-padding: 10;';
         $label->rightAnchor = $label->leftAnchor = 0;
         $label->alignment = "CENTER_LEFT";
         $label->toFront();

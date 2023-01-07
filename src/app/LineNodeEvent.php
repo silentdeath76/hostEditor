@@ -204,6 +204,7 @@ class LineNodeEvent
     {
         $label = new UXLabel($text);
         $label->minWidth = $width;
+        $label->maxWidth = $width;
         $label->height = $height;
         $label->on("click", $click);
 
