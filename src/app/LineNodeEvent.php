@@ -44,51 +44,21 @@ class LineNodeEvent
     {
         $this->recoveryNodeElement($this->edit);
 
-        $this->edit->text = $server->text;
-        $this->edit->width = $server->minWidth;
-        $this->edit->data("node", $server);
-        $this->edit->data("lineBox", $lineBox);
-
-        $this->edit->on("keyDown", function ($e) use ($lineBox, $server, $line) {
-            $this->keyPushAction($e, $lineBox, $server, $line, "Server");
-        });
-
-        $lineBox->children->replace($server, $this->edit);
-        $this->edit->requestFocus();
+        $this->bindEditKeyEvent($lineBox, $server, $line, "Server");
     }
 
     public function hostEvent(UXHBox $lineBox, UXLabel $host, HostPair $line)
     {
         $this->recoveryNodeElement($this->edit);
 
-        $this->edit->data("node", $host);
-        $this->edit->data("lineBox", $lineBox);
-
-        $this->edit->text = $host->text;
-        $this->edit->width = $host->minWidth;
-        $this->edit->on("keyDown", function ($e) use ($lineBox, $host, $line) {
-            $this->keyPushAction($e, $lineBox, $host, $line, "Host");
-        });
-
-        $lineBox->children->replace($host, $this->edit);
-        $this->edit->requestFocus();
+        $this->bindEditKeyEvent($lineBox, $host, $line, "Host");
     }
 
     public function commentEvent(UXHBox $lineBox, UXLabel $comment, HostPair $line)
     {
         $this->recoveryNodeElement($this->edit);
 
-        $this->edit->data("node", $comment);
-        $this->edit->data("lineBox", $lineBox);
-
-        $this->edit->text = $comment->text;
-        $this->edit->width = $comment->minWidth;
-        $this->edit->on("keyDown", function ($e) use ($lineBox, $comment, $line) {
-            $this->keyPushAction($e, $lineBox, $comment, $line, "Comment");
-        });
-
-        $lineBox->children->replace($comment, $this->edit);
-        $this->edit->requestFocus();
+        $this->bindEditKeyEvent($lineBox, $comment, $line, "Comment");
     }
 
     /**
@@ -166,12 +136,12 @@ class LineNodeEvent
             $comment->font->italic = true;
 
 
-            $lineBox->add($sw = new UXSwitchButton());
-            $sw->selected = $line->active;
-            $sw->width = 45;
-            $sw->height = 20;
-            $sw->on("click", function () use ($sw, $line) {
-                $line->active = $sw->selected;
+            $lineBox->add($lineActiveToggle = new UXSwitchButton());
+            $lineActiveToggle->selected = $line->active;
+            $lineActiveToggle->width = 45;
+            $lineActiveToggle->height = 20;
+            $lineActiveToggle->on("click", function () use ($lineActiveToggle, $line) {
+                $line->active = $lineActiveToggle->selected;
                 $this->host->save();
             });
 
@@ -209,5 +179,27 @@ class LineNodeEvent
         $label->on("click", $click);
 
         return $label;
+    }
+
+    /**
+     * @param UXHBox $lineBox
+     * @param UXLabel $server
+     * @param HostPair $line
+     * @param $method
+     */
+    private function bindEditKeyEvent(UXHBox $lineBox, UXLabel $server, HostPair $line, $method): void
+    {
+        $this->edit->text = $server->text;
+        $this->edit->width = $server->minWidth;
+
+        $this->edit->data("node", $server);
+        $this->edit->data("lineBox", $lineBox);
+
+        $this->edit->on("keyDown", function ($e) use ($lineBox, $server, $line, $method) {
+            $this->keyPushAction($e, $lineBox, $server, $line, $method);
+        });
+
+        $lineBox->children->replace($server, $this->edit);
+        $this->edit->requestFocus();
     }
 }

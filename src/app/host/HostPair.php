@@ -84,16 +84,16 @@ class HostPair extends AbstractLine
 
     public function setServer($server)
     {
-        $this->server = $server;
+        $this->server = trim($server);
     }
 
     public function setHost($host)
     {
-        $this->host = $host;
+        $this->host = trim($host);
     }
 
     public function setComment($comment)
     {
-        $this->comment = $comment;
+        $this->comment = trim($comment);
     }
 }
