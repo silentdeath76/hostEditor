@@ -183,23 +183,23 @@ class LineNodeEvent
 
     /**
      * @param UXHBox $lineBox
-     * @param UXLabel $server
+     * @param UXLabel $label
      * @param HostPair $line
      * @param $method
      */
-    private function bindEditKeyEvent(UXHBox $lineBox, UXLabel $server, HostPair $line, $method): void
+    private function bindEditKeyEvent(UXHBox $lineBox, UXLabel $label, HostPair $line, $method): void
     {
-        $this->edit->text = $server->text;
-        $this->edit->width = $server->minWidth;
+        $this->edit->text = $label->text;
+        $this->edit->width = $label->minWidth;
 
-        $this->edit->data("node", $server);
+        $this->edit->data("node", $label);
         $this->edit->data("lineBox", $lineBox);
 
-        $this->edit->on("keyDown", function ($e) use ($lineBox, $server, $line, $method) {
-            $this->keyPushAction($e, $lineBox, $server, $line, $method);
+        $this->edit->on("keyDown", function ($e) use ($lineBox, $label, $line, $method) {
+            $this->keyPushAction($e, $lineBox, $label, $line, $method);
         });
 
-        $lineBox->children->replace($server, $this->edit);
+        $lineBox->children->replace($label, $this->edit);
         $this->edit->requestFocus();
     }
 }
