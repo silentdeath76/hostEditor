@@ -45,8 +45,10 @@ UXApplication::launch(function (UXForm $form) {
     $eventController = new LineNodeEvent($hostFile);
 
     $form->title = "Host editor";
-    $form->minWidth = $form->maxWidth = 630;
-    $form->minHeight = $form->maxHeight = 450;
+    $form->width= 630;
+    $form->height = 450;
+    $form->layout->minWidth = $form->layout->maxWidth = 630;
+    $form->layout->minHeight = $form->layout->maxHeight = 450;
     $form->resizable = false;
 
     $form->addStylesheet('/style/base.css');
