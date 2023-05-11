@@ -5,7 +5,15 @@ namespace app\ui;
 
 
 use app\{LineNodeEvent, NewLineEvent};
-use php\gui\{layout\UXPane, layout\UXPanel, text\UXFont, UXFlatButton, UXForm, UXLabel, UXNode, UXTextField};
+use php\gui\{layout\UXHBox,
+    layout\UXPane,
+    layout\UXPanel,
+    text\UXFont,
+    UXFlatButton,
+    UXForm,
+    UXLabel,
+    UXNode,
+    UXTextField};
 
 class NewLinePanel
 {
@@ -44,10 +52,9 @@ class NewLinePanel
         $host = $this->makeHostUI($form);
         $comment = $this->makeCommentUI($form);
 
-        $this->panel->add($save = new UXFlatButton($form->lang->get("ru.save")));
+        $buttonContainer = new UXHBox();
+        $buttonContainer->add($save = new UXFlatButton($form->lang->get("ru.save")));
         $save->classes->add('add-button');
-        $save->rightAnchor = 50;
-        $save->bottomAnchor = 20;
         $save->minWidth = 70;
         $save->alignment = 'CENTER';
         $save->on("click", function () use ($server, $hostFile, $host, $comment, $container, $eventController) {
@@ -55,16 +62,19 @@ class NewLinePanel
             $this->hide();
         });
 
-        $this->panel->add($cancel = new UXFlatButton($form->lang->get("ru.cancel")));
+        $buttonContainer->add($cancel = new UXFlatButton($form->lang->get("ru.cancel")));
         $cancel->classes->add('add-button');
-        $cancel->rightAnchor = 130;
-        $cancel->bottomAnchor = 20;
         $cancel->minWidth = 70;
         $cancel->alignment = 'CENTER';
         $cancel->on("click", function () {
             $this->hide();
         });
 
+        $buttonContainer->spacing = 5;
+        $buttonContainer->bottomAnchor = 20;
+        $buttonContainer->rightAnchor = 50;
+
+        $this->panel->add($buttonContainer);
         $this->makeOverlay($form);
         $form->add($this->panel);
         $this->hide();

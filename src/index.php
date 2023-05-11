@@ -10,12 +10,16 @@ use php\gui\{
     UXFlatButton,
     UXForm
 };
+use php\io\File;
 use php\io\FileStream;
+use php\lang\System;
+use php\lib\fs;
 use php\util\Configuration;
 
 
 UXApplication::launch(function (UXForm $form) {
-    $defaultHostPath = 'C:\Windows\System32\drivers\etc\hosts';
+    $defaultHostPath = System::getEnv()["windir"] . '\System32\drivers\etc\hosts';
+    $langPath = './langs';
 
     try {
         $hostFile = new Host(FileStream::of($defaultHostPath), $form);
@@ -37,12 +41,12 @@ UXApplication::launch(function (UXForm $form) {
     $lang->set('ru.addNewLine', 'Добавить новую запись');
 
     $form->lang = $lang;
-    
+
     $eventController = new LineNodeEvent($hostFile);
 
     $form->title = "Host editor";
-    $form->minWidth = 630;
-    $form->minHeight = 450;
+    $form->minWidth = $form->maxWidth = 630;
+    $form->minHeight = $form->maxHeight = 450;
     $form->resizable = false;
 
     $form->addStylesheet('/style/base.css');

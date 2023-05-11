@@ -1,40 +1,84 @@
 * {
     -fx-focus-color: transparent;
+    -base-color: #ebecf1;
+    -second-color: #1d66e2;
+    -switch-button-first-color: -base-color !important;
 }
 
 .text-field {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 2 0;
-    -fx-border-color: #1d66e2;
+    -fx-border-color: -second-color;
 }
 
 .check-box .box {
-    -fx-focus-color: #1d66e2;
+    -fx-focus-color: -second-color;
 }
 
-.button {
-    -fx-border-color: #c1c1c1;
+.x-flat-button {
+    -fx-border-color: #b0b0b0;
     -fx-border-radius: 3;
-    -fx-background-color: #d2d5db;
+    -fx-background-color: -base-color;
     -fx-background-radius: 3;
     -fx-min-width: 90;
 }
 
-.button:hover {
-    -fx-background-color: #e8ebef;
+.x-flat-button:hover {
+    -fx-background-color: #dfe2e9;
 }
 
 .add-button {
-    -fx-background-color: #efefef;
+    -fx-background-color: -base-color;
     -fx-padding: 5px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
 }
 
 .add-button:hover {
-    -fx-background-color:rgba(224, 224, 224, 1);
+    -fx-background-color: derive(-base-color, -20%);
 }
 
 .add-button:pressed {
-    -fx-background-color: rgba(224, 224, 224, 0.8);
+    -fx-background-color: derive(-base-color, 10%);
+}
+
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: -base-color;
+}
+
+.scroll-bar {
+    -fx-background-color: -base-color;
+}
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-background-color: transparent;
+}
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: transparent;
+}
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: transparent;
+}
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: transparent;
+}
+.scroll-bar > .thumb {
+    -fx-background-color: derive(-second-color, 60%);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+.scroll-bar:horizontal .thumb {
+    -fx-background-insets: 3 -10 3 -10;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-insets: -6 3 -10 3;
+}
+*.corner {
+    -fx-background-color: -base-color;
+}
+.scroll-bar .corner {
+    -fx-background-color: -base-color;
 }

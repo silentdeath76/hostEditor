@@ -18,7 +18,7 @@ requires:
 app:
   build:
     file-name: 'App'
-    #bytecode: 'jvm'
-    #type: 'one-jar' # accept one-jar or multi-jar
+    bytecode: 'jvm'
+    type: 'one-jar' # accept one-jar or multi-jar
   launcher:
     types: [ 'bat' ]
